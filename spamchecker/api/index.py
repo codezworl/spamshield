@@ -219,7 +219,33 @@ def handler(request):
         # Parse the request path
         path = request.path
         
-        if path == '/api/spam-check' and request.method == 'POST':
+        # Handle root route - serve the HTML file
+        if path == '/' and request.method == 'GET':
+            try:
+                # Read the HTML file from templates folder
+                html_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates', 'index.html')
+                with open(html_path, 'r', encoding='utf-8') as f:
+                    html_content = f.read()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {
+                        'Content-Type': 'text/html',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'body': html_content
+                }
+            except Exception as e:
+                return {
+                    'statusCode': 500,
+                    'headers': headers,
+                    'body': json.dumps({
+                        'error': f'Could not load HTML file: {str(e)}',
+                        'success': False
+                    })
+                }
+        
+        elif path == '/api/spam-check' and request.method == 'POST':
             # Get request body
             body = request.body
             if isinstance(body, bytes):
