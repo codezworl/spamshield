@@ -1,0 +1,23 @@
+{
+  "name": "spamguard-ai",
+  "version": "1.0.0",
+  "description": "AI-powered spam detection system",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'",
+    "start": "python local_server.py"
+  },
+  "keywords": [
+    "spam",
+    "detection",
+    "ai",
+    "machine-learning",
+    "security"
+  ],
+  "author": "Alyan Shahid",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}

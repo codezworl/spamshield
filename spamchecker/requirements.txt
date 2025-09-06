@@ -1,0 +1,2 @@
+# No external dependencies required for basic spam detection
+# The API uses only Python standard library modules

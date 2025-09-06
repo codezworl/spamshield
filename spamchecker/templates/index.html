@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpamGuard AI - Advanced Spam Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-container">
+            <div class="spam-loader">
+                <div class="shield-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="loading-text">
+                    <h3 class="loading-title">SpamGuard AI</h3>
+                    <p class="loading-subtitle" id="loading-subtitle"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app-container" id="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="title-section">
+                        <h1 class="app-title">SpamGuard AI</h1>
+                        <p class="app-subtitle">Advanced Spam Detection System</p>
+                    </div>
+                </div>
+                <div class="header-info">
+                    <div class="info-card">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Powered</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="checker-container">
+                <div class="checker-header">
+                    <h2 class="checker-title">Spam Detection</h2>
+                    <p class="checker-description">Enter a message or email to check for spam using advanced AI algorithms</p>
+                </div>
+
+                <div class="input-section">
+                    <div class="input-type-selector">
+                        <label class="type-label">
+                            <input type="radio" name="input-type" value="message" checked>
+                            <span class="radio-custom"></span>
+                            <i class="fas fa-comment"></i>
+                            Message
+                        </label>
+                        <label class="type-label">
+                            <input type="radio" name="input-type" value="email">
+                            <span class="radio-custom"></span>
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </label>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="message-input" class="input-label">
+                            <i class="fas fa-edit"></i>
+                            Enter Text to Check
+                        </label>
+                        <textarea
+                            id="message-input"
+                            placeholder="Enter your message or email content here..."
+                            rows="8"
+                        ></textarea>
+                        <div class="input-hint">Paste any suspicious message or email content for AI analysis</div>
+                    </div>
+
+                    <button class="check-btn" id="check-message-btn">
+                        <span class="btn-text">Analyze with AI</span>
+                        <span class="btn-icon">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="result-section" id="result-section">
+                    <div class="result-container" id="result-container">
+                        <div class="result-placeholder">
+                            <i class="fas fa-shield-alt"></i>
+                            <p>Enter text above to start spam analysis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-section">
+                    <h3 class="features-title">AI Detection Features</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Financial Scams</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Urgency Tactics</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-link"></i>
+                            <span>Suspicious Links</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-user-secret"></i>
+                            <span>Personal Info Requests</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-envelope-open-text"></i>
+                            <span>Email Spam Patterns</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <span>Machine Learning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>&copy; 2024 SpamGuard AI - Made by Alyan Shahid</p>
+                <div class="footer-links">
+                    <span>Powered by Advanced AI</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Messages -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
