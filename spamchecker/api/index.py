@@ -199,6 +199,8 @@ spam_checker = SpamChecker()
 
 def handler(request):
     """Vercel serverless function handler"""
+    print("Handler called")  # Debug log
+    
     # Set CORS headers
     headers = {
         'Access-Control-Allow-Origin': '*',
@@ -207,23 +209,28 @@ def handler(request):
         'Content-Type': 'application/json'
     }
     
-    # Handle CORS preflight
-    if request.method == 'OPTIONS':
-        return {
-            'statusCode': 200,
-            'headers': headers,
-            'body': ''
-        }
-    
     try:
+        # Handle CORS preflight
+        if request.method == 'OPTIONS':
+            return {
+                'statusCode': 200,
+                'headers': headers,
+                'body': ''
+            }
+        
         # Parse the request path
-        path = request.path
+        path = getattr(request, 'path', '/')
+        method = getattr(request, 'method', 'GET')
+        
+        print(f"Request: {method} {path}")  # Debug log
         
         # Handle root route - serve the HTML file
-        if path == '/' and request.method == 'GET':
+        if path == '/' and method == 'GET':
             try:
                 # Read the HTML file from templates folder
                 html_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates', 'index.html')
+                print(f"HTML path: {html_path}")  # Debug log
+                
                 with open(html_path, 'r', encoding='utf-8') as f:
                     html_content = f.read()
                 
@@ -236,6 +243,7 @@ def handler(request):
                     'body': html_content
                 }
             except Exception as e:
+                print(f"HTML error: {str(e)}")  # Debug log
                 return {
                     'statusCode': 500,
                     'headers': headers,
@@ -245,9 +253,9 @@ def handler(request):
                     })
                 }
         
-        elif path == '/api/spam-check' and request.method == 'POST':
+        elif path == '/api/spam-check' and method == 'POST':
             # Get request body
-            body = request.body
+            body = getattr(request, 'body', '{}')
             if isinstance(body, bytes):
                 body = body.decode('utf-8')
             
@@ -256,7 +264,7 @@ def handler(request):
             
             # Extract text to check
             text = data.get('text', '').strip()
-            text_type = data.get('type', 'message')  # 'message' or 'email'
+            text_type = data.get('type', 'message')
             
             if not text:
                 return {
@@ -279,7 +287,7 @@ def handler(request):
                 'body': json.dumps(result)
             }
         
-        elif path == '/api/health' and request.method == 'GET':
+        elif path == '/api/health' and method == 'GET':
             return {
                 'statusCode': 200,
                 'headers': headers,
@@ -296,12 +304,13 @@ def handler(request):
                 'statusCode': 404,
                 'headers': headers,
                 'body': json.dumps({
-                    'error': 'Endpoint not found',
+                    'error': f'Endpoint not found: {method} {path}',
                     'success': False
                 })
             }
     
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as e:
+        print(f"JSON error: {str(e)}")  # Debug log
         return {
             'statusCode': 400,
             'headers': headers,
@@ -312,6 +321,7 @@ def handler(request):
         }
     
     except Exception as e:
+        print(f"General error: {str(e)}")  # Debug log
         return {
             'statusCode': 500,
             'headers': headers,
